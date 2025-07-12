@@ -5,7 +5,9 @@ const EditQuestions = ({ questions, onEditQuestions, onDeleteQuestions }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(searchTerm);
+    const temp = questions.filter((que) =>
+      que.question.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   };
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -25,14 +27,19 @@ const EditQuestions = ({ questions, onEditQuestions, onDeleteQuestions }) => {
         </button>
       </form>
       <p className="text-white text-[60px] font-alfa">Ini ngedit soal</p>
-      {questions.map((question) => (
-        <QuestionCard
-          question={question}
-          onDeleteQuestion={onDeleteQuestions}
-          onEditQuestion={onEditQuestions}
-          setMessage={setMessage}
-        />
-      ))}
+      {questions
+        .filter((que) =>
+          que.question.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .map((question) => (
+          <QuestionCard
+            key={question.id}
+            question={question}
+            onDeleteQuestion={onDeleteQuestions}
+            onEditQuestion={onEditQuestions}
+            setMessage={setMessage}
+          />
+        ))}
       {message && (
         <div className="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
           {message}
