@@ -11,7 +11,6 @@ const AddQuestion = ({ setDisplay, onCreateQuestions }) => {
     },
     answer: "",
   };
-  const [message, setMessage] = useState("");
   const [question, setQuestion] = useState(initialState);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +22,6 @@ const AddQuestion = ({ setDisplay, onCreateQuestions }) => {
       alert("Semua field harus diisi!");
       return;
     }
-    setMessage("Berhasil");
-    setTimeout(() => setMessage(""), 3000);
     onCreateQuestions(question);
     setQuestion(initialState);
   };
@@ -50,13 +47,6 @@ const AddQuestion = ({ setDisplay, onCreateQuestions }) => {
   };
   return (
     <div className="h-full p-[15px] flex flex-col gap-1 items-center justify-center">
-      <div>
-        {message && (
-          <div className="flex justify-center  bg-green-700 w-[500px] h-[50px] font-alfa text-white items-center">
-            Berhasil Ditambahkan
-          </div>
-        )}
-      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="">
           <input

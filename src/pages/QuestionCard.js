@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 
-const QuestionCard = ({
-  onEditQuestion,
-  onDeleteQuestion,
-  question,
-  setMessage,
-}) => {
+const QuestionCard = ({ onEditQuestion, onDeleteQuestion, question }) => {
   const inisialState = {
     id: question.id,
     question: question.question,
@@ -45,8 +40,6 @@ const QuestionCard = ({
   };
   const handleDelete = () => {
     const confirmDelete = window.confirm("Yakin mau menghapus soal ini?");
-    setMessage("Soal berhasil dihapus!");
-    setTimeout(() => setMessage(""), 3000);
     onDeleteQuestion(edit.id);
   };
   return (

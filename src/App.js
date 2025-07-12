@@ -14,6 +14,8 @@ import {
 } from "./API/QuestionsAPI";
 import AddQuestion from "./pages/AddQuestion";
 import EditQuestions from "./pages/EditQuestions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [display, setDisplay] = useState("start");
@@ -21,7 +23,7 @@ function App() {
   const [answer, setAnswer] = useState({});
   const [score, setScore] = useState({});
   const [questions, setQuestions] = useState([]);
-
+  const notify = () => toast("Wow so easy!");
   useEffect(() => {
     onFetchQuestions();
   }, []);
@@ -32,25 +34,40 @@ function App() {
   };
 
   const onDeleteQuestions = async (id) => {
-    await deleteQuestionsAPI(id);
-    setQuestions((prevQuestions) =>
-      prevQuestions.filter((question) => question.id !== id)
-    );
+    try {
+      await deleteQuestionsAPI(id);
+      setQuestions((prevQuestions) =>
+        prevQuestions.filter((question) => question.id !== id)
+      );
+      toast.success("Soal berhasil dihapus!");
+    } catch (err) {
+      toast.error("Gagal menghapus soal.");
+    }
   };
   const onEditQuestions = async (id, data) => {
-    const response = await editQuestionsAPI(id, data);
-    const editedQuestions = questions.map((ques) => {
-      if (ques.id === id) {
-        return { ...ques, ...response };
-      }
-      return ques;
-    });
-    setQuestions(editedQuestions);
+    try {
+      const response = await editQuestionsAPI(id, data);
+      const editedQuestions = questions.map((ques) => {
+        if (ques.id === id) {
+          return { ...ques, ...response };
+        }
+        return ques;
+      });
+      setQuestions(editedQuestions);
+      toast.success("berhasil edit soal");
+    } catch (error) {
+      toast.error("gagal edit soal");
+    }
   };
 
   const onCreateQuestions = async (data) => {
-    const response = await createQuestionsAPI(data);
-    setQuestions([...questions, response]);
+    try {
+      const response = await createQuestionsAPI(data);
+      setQuestions([...questions, response]);
+      toast.success("berhasil menambahkan soal");
+    } catch (error) {
+      toast.error("Gagal menambahkan soal");
+    }
   };
   const handleReset = () => {
     setDisplay("start");
@@ -110,6 +127,19 @@ function App() {
           />
         )}
       </div>
+
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Footer handleReset={handleReset} setDisplay={setDisplay} />
     </div>
   );
