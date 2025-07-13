@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import QuestionCard from "./QuestionCard";
 import FilterAnswer from "./FilterAnswer";
+import DownloadQuestion from "./DownloadQuestion";
 const EditQuestions = ({ questions, onEditQuestions, onDeleteQuestions }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchAnswer, setSearchAnswer] = useState("ALL");
@@ -50,6 +51,7 @@ const EditQuestions = ({ questions, onEditQuestions, onDeleteQuestions }) => {
           onEditQuestion={onEditQuestions}
         />
       ))}
+      <DownloadQuestion filteredQuestions={filteredQuestions} />
     </div>
   );
 };
