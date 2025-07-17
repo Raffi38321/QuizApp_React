@@ -16,21 +16,34 @@ import AddQuestion from "./pages/AddQuestion";
 import EditQuestions from "./pages/EditQuestions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ROUTES } from "./constants/routes";
 
 function App() {
-  const [display, setDisplay] = useState("start");
+  const [display, setDisplay] = useState(ROUTES.START);
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState({});
   const [score, setScore] = useState({});
   const [questions, setQuestions] = useState([]);
-  const notify = () => toast("Wow so easy!");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     onFetchQuestions();
   }, []);
 
   const onFetchQuestions = async () => {
-    const response = await fetchQuestionsAPi();
-    setQuestions(response);
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await fetchQuestionsAPi();
+      setQuestions(response);
+    } catch (error) {
+      setError("Gagal memuat pertanyaan. Silakan coba lagi.");
+      toast.error("Gagal memuat pertanyaan");
+      console.error("Error fetching questions:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onDeleteQuestions = async (id) => {
@@ -70,7 +83,7 @@ function App() {
     }
   };
   const handleReset = () => {
-    setDisplay("start");
+    setDisplay(ROUTES.START);
     setIndex(0);
     setAnswer({});
     setScore({});
@@ -87,44 +100,76 @@ function App() {
     <div className="h-screen flex flex-col ">
       <Header display={display} />
       <div className="w-full bg-charcoal flex-1">
-        {display === "start" && <Start setDisplay={setDisplay} />}
-        {display === "question" && (
-          <Question
-            index={index}
-            handleNext={handleNext}
-            handlePrev={handlePrev}
-            answer={answer}
-            setAnswer={setAnswer}
-            setScore={setScore}
-            setDisplay={setDisplay}
-            questions={questions}
-          />
+        {isLoading && (
+          <div className="flex justify-center items-center h-full">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pastelPink"></div>
+          </div>
         )}
-        {display === "review" && (
-          <Review
-            answer={answer}
-            index={index}
-            setDisplay={setDisplay}
-            handleNext={handleNext}
-            handlePrev={handlePrev}
-            questions={questions}
-          />
+
+        {error && !isLoading && (
+          <div className="flex justify-center items-center h-full">
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">Error! </strong>
+              <span className="block sm:inline">{error}</span>
+              <button
+                className="bg-pastelPink hover:bg-copper text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={onFetchQuestions}
+              >
+                Coba Lagi
+              </button>
+            </div>
+          </div>
         )}
-        {display === "score" && (
-          <Score score={score} setDisplay={setDisplay} setIndex={setIndex} />
-        )}
-        {display === "add" && (
-          <AddQuestion
-            setDisplay={setDisplay}
-            onCreateQuestions={onCreateQuestions}
-          />
-        )}
-        {display === "edit" && (
-          <EditQuestions
-            questions={questions}
-            onEditQuestions={onEditQuestions}
-            onDeleteQuestions={onDeleteQuestions}
-          />
+
+        {!isLoading && !error && (
+          <>
+            {display === ROUTES.START && <Start setDisplay={setDisplay} />}
+            {display === ROUTES.QUESTION && (
+              <Question
+                index={index}
+                handleNext={handleNext}
+                handlePrev={handlePrev}
+                answer={answer}
+                setAnswer={setAnswer}
+                setScore={setScore}
+                setDisplay={setDisplay}
+                questions={questions}
+              />
+            )}
+            {display === ROUTES.REVIEW && (
+              <Review
+                answer={answer}
+                index={index}
+                setDisplay={setDisplay}
+                handleNext={handleNext}
+                handlePrev={handlePrev}
+                questions={questions}
+              />
+            )}
+            {display === ROUTES.SCORE && (
+              <Score
+                score={score}
+                setDisplay={setDisplay}
+                setIndex={setIndex}
+              />
+            )}
+            {display === ROUTES.ADD && (
+              <AddQuestion
+                setDisplay={setDisplay}
+                onCreateQuestions={onCreateQuestions}
+              />
+            )}
+            {display === ROUTES.EDIT && (
+              <EditQuestions
+                questions={questions}
+                onEditQuestions={onEditQuestions}
+                onDeleteQuestions={onDeleteQuestions}
+              />
+            )}
+          </>
         )}
       </div>
 

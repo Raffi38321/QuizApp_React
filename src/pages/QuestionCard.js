@@ -35,12 +35,35 @@ const QuestionCard = ({ onEditQuestion, onDeleteQuestion, question }) => {
     }
   };
   const handleSave = () => {
+    // Validasi input
+    if (!edit.question.trim()) {
+      alert("Pertanyaan tidak boleh kosong");
+      return;
+    }
+
+    if (
+      !edit.options.A.trim() ||
+      !edit.options.B.trim() ||
+      !edit.options.C.trim() ||
+      !edit.options.D.trim()
+    ) {
+      alert("Semua opsi jawaban harus diisi");
+      return;
+    }
+
+    if (!["A", "B", "C", "D"].includes(edit.answer)) {
+      alert("Jawaban harus salah satu dari: A, B, C, atau D");
+      return;
+    }
+
     setIsEdit(!isEdit);
     onEditQuestion(edit.id, edit);
   };
   const handleDelete = () => {
     const confirmDelete = window.confirm("Yakin mau menghapus soal ini?");
-    onDeleteQuestion(edit.id);
+    if (confirmDelete) {
+      onDeleteQuestion(edit.id);
+    }
   };
   return (
     <div className="bg-white justify-center w-[700px] gap-[8px] rounded-[20px] px-[20px] py-[10px]">

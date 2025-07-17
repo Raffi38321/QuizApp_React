@@ -1,11 +1,12 @@
 import React from "react";
+import { ROUTES } from "../constants/routes";
 
 const Footer = ({ handleReset, setDisplay }) => {
   return (
     <div className="bg-[#435B66] w-full flex justify-between items-center px-[73px] py-[9px] text-english-lavender font-aclonica h-[88px]">
       <div className="flex gap-[24px]">
         <svg
-          onClick={() => setDisplay("edit")}
+          onClick={() => setDisplay(ROUTES.EDIT)}
           className="bg-copper rounded-full fill-pastelPink hover:border-white hover:scale-110 hover:shadow-2xl hover:fill-white"
           xmlns="http://www.w3.org/2000/svg"
           width="64"
@@ -37,7 +38,7 @@ const Footer = ({ handleReset, setDisplay }) => {
           />
         </svg>
         <svg
-          onClick={() => setDisplay("add")}
+          onClick={() => setDisplay(ROUTES.ADD)}
           className="bg-copper border-[6px] border-pastelPink rounded-full fill-pastelPink hover:border-white hover:scale-110 hover:shadow-2xl hover:fill-white"
           xmlns="http://www.w3.org/2000/svg"
           x="0px"

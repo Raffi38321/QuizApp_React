@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# React Quiz App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi kuis interaktif yang dibuat dengan React. Aplikasi ini memungkinkan pengguna untuk mengambil kuis, melihat skor, dan mengelola pertanyaan (menambah, mengedit, dan menghapus).
 
-## Available Scripts
+## Fitur
 
-In the project directory, you can run:
+- Mengambil kuis dengan pertanyaan pilihan ganda
+- Melihat hasil dan skor setelah menyelesaikan kuis
+- Menambahkan pertanyaan baru
+- Mengedit pertanyaan yang ada
+- Menghapus pertanyaan
+- Mencari pertanyaan berdasarkan teks atau jawaban
+- Mengunduh pertanyaan
 
-### `npm start`
+## Teknologi yang Digunakan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18
+- Tailwind CSS untuk styling
+- JSON Server untuk backend API
+- Axios untuk HTTP requests
+- React Toastify untuk notifikasi
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Cara Menjalankan Aplikasi
 
-### `npm test`
+### Prasyarat
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (versi 14 atau lebih baru)
+- npm atau yarn
 
-### `npm run build`
+### Langkah-langkah Instalasi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone repositori ini
+2. Install dependensi:
+   ```
+   npm install
+   ```
+3. Jalankan JSON Server untuk backend:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```
+   npm run server
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Server akan berjalan di http://127.0.0.1:3005
 
-### `npm run eject`
+4. Jalankan aplikasi React di terminal terpisah:
+   ```
+   npm start
+   ```
+   Aplikasi akan berjalan di http://localhost:3000
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Struktur Aplikasi
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/components/` - Komponen UI yang dapat digunakan kembali
+- `src/pages/` - Halaman utama aplikasi
+- `src/API/` - Fungsi untuk berkomunikasi dengan backend
+- `db.json` - Database JSON untuk menyimpan pertanyaan
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Penggunaan Aplikasi
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Halaman Start**: Halaman awal aplikasi dengan tombol untuk memulai kuis atau mengelola pertanyaan
+2. **Halaman Question**: Menampilkan pertanyaan kuis dan opsi jawaban
+3. **Halaman Review**: Meninjau jawaban sebelum mengirimkan
+4. **Halaman Score**: Menampilkan skor akhir setelah menyelesaikan kuis
+5. **Halaman Add Question**: Form untuk menambahkan pertanyaan baru
+6. **Halaman Edit Questions**: Mengelola pertanyaan yang ada (edit/hapus)
 
-## Learn More
+## Pengembangan Selanjutnya
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Implementasi autentikasi pengguna
+- Menambahkan kategori untuk pertanyaan
+- Implementasi timer untuk kuis
+- Menambahkan statistik dan riwayat kuis
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Lisensi
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT](https://choosealicense.com/licenses/mit/)

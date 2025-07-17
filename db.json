@@ -56,15 +56,15 @@
       "answer": "A"
     },
     {
-      "id": "5199",
-      "question": "Laper",
+      "id": "6",
+      "question": "What is JSX in React?",
       "options": {
-        "A": "kanjut Badag",
-        "B": "coli",
-        "C": "Kangkung",
-        "D": "Gesek"
+        "A": "A JavaScript XML syntax extension",
+        "B": "A JavaScript library",
+        "C": "A database query language",
+        "D": "A styling framework"
       },
-      "answer": "B"
+      "answer": "A"
     }
   ]
 }
